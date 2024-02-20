@@ -1,140 +1,242 @@
 * {
-    font-family: Arial, Helvetica, sans-serif;
-    box-sizing: border-box;
+  font-family: 'Roboto', Arial, sans-serif;
+  box-sizing: border-box;
+}
+
+body {
+  background: linear-gradient(to bottom, #eae4e9, #cddafd); /* Gradient from left to right with more contrast */
+  color: #414551;
+  max-width: 400px;
+  padding: 1rem;
+  margin: 0 auto;
+}
+
+
+.new-item-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.btn {
+  background: #bee1e6;
+  border: 1px solid #72cfdd;
+  color: #414551;
+  height: 40px;
+  font-size: larger;
+  font-weight: normal;
+  padding: 0.15em 0.5em;
+  border-radius: 8px;
+  cursor: pointer;
+  outline: none;
+}
+
+.btn:hover,
+.btn:focus-visible {
+  background: #a5dae2;
+}
+
+.btn.btn-danger {
+  background: #fad2e1;
+  border: 1px solid #ffa0c3;
+  color: #414551;
+}
+
+.btn.btn-danger:hover,
+.btn.btn-danger:focus-visible {
+  background: #fcc2d7;
+}
+
+.new-item-form input {
+  outline: none;
+  font-size: x-large;
+  height: 50px;
+  border: 1px solid #a1b9fa;
+  background: #dfe7fd;
+  border-radius: 8px;
+  padding: 0.25em 0.5em;
+  color: #414551;
+}
+
+.new-item-form input:focus {
+  border: 1px solid #6a0a44;
+}
+
+.header {
+  font-size: 1.5rem;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.list {
+  margin: 0;
+  padding: 0;
+  margin-left: 1rem;
+  list-style: none;
+}
+
+.list li:has(input:checked) label {
+  color: #414551;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.list li {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.list li label {
+  display: flex;
+  font-size: larger;
+  gap: 0.8rem;
+  cursor: pointer;
+  align-items: center;
+}
+
+.list li:has(input:focus-visible) label {
+  outline: 1px solid hsl(0, 0%, 0%);
+}
+
+.list li input {
+  outline: none;
+  width: 0;
+  height: 0;
+  appearance: none;
+  pointer-events: none;
+  position: absolute;
+}
+
+.list li label::before {
+  content: "";
+  display: block;
+  width: 27px;
+  height: 27px;
+  border: 1px solid #a9c0ff;
+  background: #dfe7fd;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.list li label:hover::before {
+  background: #bee1e6;
+}
+
+.list li:has(input:checked) label::before {
+  content: "✔";
+  background: #bee1e6;
+  border: 1px solid #91d6e1;
+  color: #414551;
+  font-size: 17px;
+  font-weight: bold;
+}
+
+.list li:has(input:checked) label:hover::before {
+  background: #bee1e6;
+}
+
+/* React logo at the bottom*/
+
+.main-container {
+  position: relative;
+  bottom: 0;
+  left: 0;
+  margin-top: 200px; 
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  z-index: -1; /* behind the content */
+}
+
+
+.container {
+  width: 180px;
+  height: 180px;
+  margin: 1px auto 0 auto;
+  background: transparent;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.react-logo {
+  display: inline-block;
+  border-radius: 50%;
+  border: 10px solid #00d8ff;
+
+  animation-name: rotate;
+  animation-duration: 5s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+
+}
+
+.react-logo,
+.react-logo:before,
+.react-logo:after {
+  position: absolute;
+  display: inline-block;
+  width: 128px; /* 20% smaller than 160px */
+  height: 44.8px; /* 20% smaller than 56px */
+  border-radius: 50%;
+  border: 6.4px solid #00d8ff; /* 20% smaller than 8px */
+}
+
+.nucleo,
+.react-logo,
+.react-logo:before,
+.react-logo:after {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nucleo {
+  width: 20px;
+  height: 20px;
+  border-radius: 100%;
+  background: #00d8ff;
+}
+
+.react-logo:before,
+.react-logo:after {
+  content: "";
+}
+
+.react-logo:after {
+  transform: rotate(-57deg);
+}
+
+.react-logo:before {
+  transform: rotate(57deg);
+}
+
+.title {
+  font-size: 25px;
+  background: transparent;
+  color: #414551;
+  width: 250px;
+  margin: 2px auto;
+  text-align: center;
+}
+
+@keyframes rotate {
+
+  100% {
+    transform: rotate(360deg);
   }
-  
-  body {
-    background: #333;
-    color: hsl(200, 100%, 90%);
-    max-width: 400px;
-    padding: 1rem;
-    margin: 0 auto;
-  }
-  
-  .new-item-form {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-  
-  .form-row {
-    display: flex;
-    flex-direction: column;
-    gap: 0.1rem;
-  }
-  
-  .btn {
-    background: hsl(200, 100%, 50%, 0.1);
-    border: 1px solid hsl(200, 100%, 50%);
-    color: hsl(200, 100%, 50%);
-    padding: 0.25em 0.5em;
-    border-radius: 0.25em;
-    cursor: pointer;
-    outline: none;
-  }
-  
-  .btn:hover,
-  .btn:focus-visible {
-    background: hsl(200, 100%, 50%, 0.2);
-  }
-  
-  .btn.btn-danger {
-    background: hsl(0, 100%, 40%, 0.1);
-    border: 1px solid hsl(0, 100%, 40%);
-    color: hsl(0, 100%, 40%);
-  }
-  
-  .btn.btn-danger:hover,
-  .btn.btn-danger:focus-visible {
-    background: hsl(0, 100%, 40%, 0.2);
-  }
-  
-  .new-item-form input {
-    outline: none;
-    border: 1px solid hsl(200, 100%, 40%);
-    background: hsl(200, 100%, 30%);
-    border-radius: 0.25em;
-    padding: 0.25em 0.5em;
-    color: hsl(200, 100%, 90%);
-  }
-  
-  .new-item-form input:focus {
-    border: 1px solid hsl(200, 100%, 70%);
-  }
-  
-  .header {
-    font-size: 1.5rem;
-    margin-top: 1.5rem;
-    margin-bottom: 0.5rem;
-  }
-  
-  .list {
-    margin: 0;
-    padding: 0;
-    margin-left: 1rem;
-    list-style: none;
-  }
-  
-  .list li:has(input:checked) label {
-    color: hsl(200, 20%, 40%);
-  }
-  
-  .list {
-    display: flex;
-    flex-direction: column;
-    gap: 0.3rem;
-  }
-  
-  .list li {
-    display: flex;
-    gap: 0.5rem;
-    align-items: center;
-  }
-  
-  .list li label {
-    display: flex;
-    gap: 0.25rem;
-    cursor: pointer;
-    align-items: center;
-  }
-  
-  .list li:has(input:focus-visible) label {
-    outline: 1px solid hsl(200, 100%, 50%);
-  }
-  
-  .list li input {
-    outline: none;
-    width: 0;
-    height: 0;
-    appearance: none;
-    pointer-events: none;
-    position: absolute;
-  }
-  
-  .list li label::before {
-    content: "";
-    display: block;
-    width: 0.9rem;
-    height: 0.9rem;
-    background: hsl(200, 100%, 90%);
-    border-radius: 0.25em;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .list li label:hover::before {
-    background: hsl(200, 100%, 80%);
-  }
-  
-  .list li:has(input:checked) label::before {
-    content: "✔";
-    background: hsl(200, 100%, 40%);
-    color: hsl(200, 100%, 90%);
-    font-size: 0.75rem;
-    font-weight: bold;
-  }
-  
-  .list li:has(input:checked) label:hover::before {
-    background: hsl(200, 100%, 30%);
-  }
+}
