@@ -4,7 +4,7 @@
 }
 
 body {
-  background: linear-gradient(to bottom, #eae4e9, #cddafd); /* Gradient from left to right with more contrast */
+  /* background: linear-gradient(to bottom, #eae4e9, #cddafd);  *//* Gradient from left to right with more contrast */
   color: #414551;
   max-width: 400px;
   padding: 1rem;
@@ -154,7 +154,7 @@ body {
   position: relative;
   bottom: 0;
   left: 0;
-  margin-top: 200px; 
+  margin-top: 200px;
   width: 100%;
   height: auto;
   object-fit: cover;

@@ -1,53 +1,57 @@
-import { useEffect, useState } from "react"
-import { NewTodoForm } from "./NewTodoForm"
-import "./styles.css"
-import { TodoList } from "./TodoList"
+import React, { useEffect, useState } from "react";
+import { NewTodoForm } from "./NewTodoForm";
+import "./styles.css";
+import { TodoList } from "./TodoList";
+import GradientComponent from "./GradientComponent";
 
-export default function App() {
-  // Store the todos in local storage
-  const [todos, setTodos] = useState(() => {
-    const localValue = localStorage.getItem("ITEMS")
-    if (localValue == null) return []
+function App() {
+    const [todos, setTodos] = useState(() => {
+        const localValue = localStorage.getItem("ITEMS");
+        return localValue ? JSON.parse(localValue) : [];
+    });
 
-    return JSON.parse(localValue)
-  })
-  // every time the todos change, update the local storage
-  useEffect(() => {
-    localStorage.setItem("ITEMS", JSON.stringify(todos))
-  }, [todos])
+    const [backgroundColor, setBackgroundColor] = useState("#0b3954");
 
-  function addTodo(title) {
-    setTodos(currentTodos => {
-      return [
-        ...currentTodos,
-        { id: crypto.randomUUID(), title, completed: false },
-      ]
-    })
-  }
+    useEffect(() => {
+        localStorage.setItem("ITEMS", JSON.stringify(todos));
+    }, [todos]);
 
-  function toggleTodo(id, completed) {
-    setTodos(currentTodos => {
-      return currentTodos.map(todo => {
-        if (todo.id === id) {
-          return { ...todo, completed }
-        }
+    function addTodo(title) {
+        setTodos((currentTodos) => [
+            ...currentTodos,
+            { id: crypto.randomUUID(), title, completed: false },
+        ]);
+    }
 
-        return todo
-      })
-    })
-  }
+    function toggleTodo(id, completed) {
+        setTodos((currentTodos) =>
+            currentTodos.map((todo) =>
+                todo.id === id ? { ...todo, completed } : todo
+            )
+        );
+    }
 
-  function deleteTodo(id) {
-    setTodos(currentTodos => {
-      return currentTodos.filter(todo => todo.id !== id)
-    })
-  }
+    function deleteTodo(id) {
+        setTodos((currentTodos) =>
+            currentTodos.filter((todo) => todo.id !== id)
+        );
+    }
 
-  return (
-    <>
-      <NewTodoForm onSubmit={addTodo} />
-      <h1 className="header">Todo List:</h1>
-      <TodoList todos={todos} toggleTodo={toggleTodo} deleteTodo={deleteTodo} />
-    </>
-  )
+    // Set the background color directly on the body tag
+    useEffect(() => {
+        document.body.style.backgroundColor = backgroundColor;
+    }, [backgroundColor]);
+
+    return (
+        <>
+            <GradientComponent onBackgroundColorChange={setBackgroundColor} />
+            <div className="app-container">
+                <NewTodoForm onSubmit={addTodo} />
+                <h1 className="header">Todo List:</h1>
+                <TodoList todos={todos} toggleTodo={toggleTodo} deleteTodo={deleteTodo} />
+            </div>
+        </>
+    );
 }
+
+export default App;
