@@ -1,6 +1,6 @@
 // GradientComponent.jsx
 
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { NeatGradient } from "@firecms/neat";
 
 const GradientComponent = () => {
@@ -8,47 +8,59 @@ const GradientComponent = () => {
     const gradientRef = useRef(null);
 
     useEffect(() => {
+        // Inject the style to hide all <a> elements with !important
+        const style = document.createElement("style");
+        style.innerHTML = `a { display: none !important; }`; // Adding !important
+        document.head.appendChild(style);
+
+        // Cleanup when the component is unmounted
+        return () => {
+            document.head.removeChild(style);
+        };
+    }, []);
+
+    useEffect(() => {
         if (!canvasRef.current) return;
 
         const config = {
-          "colors": [
-              {
-                  "color": "#D5DFF4",
-                  "enabled": true
-              },
-              {
-                  "color": "#ECF2FF",
-                  "enabled": true
-              },
-              {
-                  "color": "#F3D4F2",
-                  "enabled": true
-              },
-              {
-                  "color": "#E0E7FF",
-                  "enabled": true
-              },
-              {
-                  "color": "#F6FFFF",
-                  "enabled": true
-              }
-          ],
-          "speed": 8,
-          "horizontalPressure": 2,
-          "verticalPressure": 5,
-          "waveFrequencyX": 2,
-          "waveFrequencyY": 4,
-          "waveAmplitude": 8,
-          "shadows": 7,
-          "highlights": 6,
-          "colorBrightness": 1.05,
-          "colorSaturation": 1,
-          "wireframe": false,
-          "colorBlending": 7,
-          "backgroundColor": "#0b3954",
-          "backgroundAlpha": 1,
-          "resolution": 2
-      };
+        "colors": [
+            {
+                "color": "#D5DFF4",
+                "enabled": true
+            },
+            {
+                "color": "#ECF2FF",
+                "enabled": true
+            },
+            {
+                "color": "#F3D4F2",
+                "enabled": true
+            },
+            {
+                "color": "#E0E7FF",
+                "enabled": true
+            },
+            {
+                "color": "#F6FFFF",
+                "enabled": true
+            }
+        ],
+        "speed": 8,
+        "horizontalPressure": 2,
+        "verticalPressure": 5,
+        "waveFrequencyX": 2,
+        "waveFrequencyY": 4,
+        "waveAmplitude": 8,
+        "shadows": 7,
+        "highlights": 6,
+        "colorBrightness": 1.05,
+        "colorSaturation": 1,
+        "wireframe": false,
+        "colorBlending": 7,
+        "backgroundColor": "#0b3954",
+        "backgroundAlpha": 1,
+        "resolution": 2
+    };
 
         gradientRef.current = new NeatGradient({
             ref: canvasRef.current,
